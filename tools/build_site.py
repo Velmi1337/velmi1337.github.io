@@ -93,47 +93,84 @@ COPY={
 def route(lang,project=''):
  return ('/ru/' if lang=='ru' else '/')+(project+'/' if project else '')
 
+
+# Material 3 Expressive presentation; existing bilingual product copy remains above.
+UI={
+'en':{'home':'Home','appearance':'Appearance','appearance_help':'Make this space yours. Your choices stay in this browser.','theme':'Theme','auto':'System','light':'Light','dark':'Dark','colors':'Accent color','lavender':'Lavender','mint':'Mint','sky':'Sky','rose':'Rose','close':'Close appearance settings','hero':'Android.<br>Linux.<br><span>More you.</span>','eyebrow':'Independent projects by Velmi1337','hello':'Hi, I’m','creator':'Making little tools for everyday possibilities.','profile':'Expressive profile','project_eyebrow':'Made to be used','project_count':'Two platforms. Two open-source projects.','footer_cta':'Try a project.<br>Make it better.','footer_text':'A device report, a reproducible bug, a useful idea. Open source gets better together.','feedback':'Find a project','design':'Design & credits','setup':'Getting started','learn_more':'Explore project'},
+'ru':{'home':'Главная','appearance':'Оформление','appearance_help':'Настройте сайт под себя. Выбор сохраняется только в этом браузере.','theme':'Тема','auto':'Системная','light':'Светлая','dark':'Тёмная','colors':'Акцентный цвет','lavender':'Лаванда','mint':'Мята','sky':'Небо','rose':'Роза','close':'Закрыть настройки оформления','hero':'Android.<br>Linux.<br><span>По-твоему.</span>','eyebrow':'Независимые проекты Velmi1337','hello':'Привет, я','creator':'Делаю небольшие инструменты для повседневных задач.','profile':'Expressive-профиль','project_eyebrow':'Чтобы пользоваться','project_count':'Две платформы. Два открытых проекта.','footer_cta':'Попробуйте.<br>Помогите улучшить.','footer_text':'Проверка на устройстве, понятный баг, полезная идея. Открытые проекты становятся лучше вместе.','feedback':'Выбрать проект','design':'Дизайн и авторство','setup':'Первый запуск','learn_more':'О проекте'},
+}
+
+def icon(name):
+ return f'<svg class="icon" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#{name}"></use></svg>'
+
+def bloom(cx=120,cy=120,radius=112,petals=12,depth=.06):
+ import math
+ return 'M'+' L'.join(f'{cx+radius*(1-depth+depth*math.cos(petals*2*math.pi*n/180))*math.cos(2*math.pi*n/180-math.pi/2):.2f} {cy+radius*(1-depth+depth*math.cos(petals*2*math.pi*n/180))*math.sin(2*math.pi*n/180-math.pi/2):.2f}' for n in range(180))+' Z'
+
+def shape_decoration():
+ return f'<svg class="shape-decoration" viewBox="0 0 240 240" aria-hidden="true"><path d="{bloom(petals=8,depth=.12)}"/></svg>'
+
+def avatar(lang):
+ return f'<svg class="avatar-bloom" viewBox="0 0 240 240" role="img" aria-label="GitHub avatar: Velmi1337"><defs><clipPath id="avatar-clip"><path d="{bloom()}"/></clipPath></defs><path d="{bloom(radius=119)}" fill="var(--md-sys-color-primary)"/><image href="/assets/avatar.png" x="8" y="8" width="224" height="224" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-clip)"/></svg>'
+
 def head(lang,project=''):
- c=COPY[lang];url=BASE+route(lang,project);title=c[project+'_title'] if project else c['title'];desc=c[project+'_description'] if project else c['description']
- image=BASE+'/assets/'+('ctsv-'+lang+'.png' if project=='ctsv' else 'alol.png' if project=='alol' else 'social.png')
+ c=COPY[lang];u=UI[lang];url=BASE+route(lang,project);title=c[project+'_title'] if project else c['title'];desc=c[project+'_description'] if project else c['description']
+ image=BASE+'/assets/social.png'
  alternates=''.join(f'<link rel="alternate" hreflang="{lng}" href="{BASE+route(lng,project)}">' for lng in ['en','ru'])+f'<link rel="alternate" hreflang="x-default" href="{BASE+route("en",project)}">'
  if project:
   schema={'@context':'https://schema.org','@type':'SoftwareApplication','name':project.upper(),'url':url,'description':desc,'operatingSystem':'Android' if project=='ctsv' else 'Linux','applicationCategory':'UtilitiesApplication' if project=='ctsv' else 'GameApplication','downloadUrl':GH+'/'+project.upper()+'/releases/latest','isAccessibleForFree':True,'author':{'@type':'Person','name':'Velmi1337','url':GH},'license':GH+'/'+project.upper()+'/blob/main/LICENSE'}
- else:
-  schema={'@context':'https://schema.org','@type':'WebSite','name':'Velmi1337 projects','url':url,'inLanguage':lang,'description':desc}
- return f'''<!doctype html>
-<html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{e(title)}</title>
-<meta name="description" content="{e(desc,quote=True)}"><meta name="robots" content="index,follow"><meta name="theme-color" content="#182b2b"><link rel="canonical" href="{url}">{alternates}
+ else:schema={'@context':'https://schema.org','@type':'WebSite','name':'Velmi1337 projects','url':url,'inLanguage':lang,'description':desc}
+ boot='''(()=>{try{const m=localStorage.getItem('velmi-md3-mode'),p=localStorage.getItem('velmi-md3-palette');document.documentElement.dataset.mode=['light','dark','auto'].includes(m)?m:'auto';document.documentElement.dataset.palette=['lavender','mint','sky','rose'].includes(p)?p:'lavender'}catch{}})();'''
+ html=f'''<!doctype html>
+<html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{e(title)}</title><script>{boot}</script>
+<meta name="description" content="{e(desc,quote=True)}"><meta name="robots" content="index,follow"><meta name="theme-color" content="#65558f"><link rel="canonical" href="{url}">{alternates}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Velmi1337"><meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(desc,quote=True)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{image}"><meta property="og:locale" content="{'ru_RU' if lang=='ru' else 'en_US'}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title,quote=True)}"><meta name="twitter:description" content="{e(desc,quote=True)}"><meta name="twitter:image" content="{image}">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/style.css"><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="skip" href="#main">{c['skip']}</a><div class="wrap"><header class="top"><a class="brand" href="{route(lang)}">Velmi<span>1337</span></a><nav aria-label="{'Project navigation' if lang=='en' else 'Навигация проектов'}"><a href="{route(lang,'ctsv')}">CTSV</a><a href="{route(lang,'alol')}">ALOL</a><a href="{GH}">GitHub ↗</a></nav><a class="language" lang="{'ru' if lang=='en' else 'en'}" hreflang="{'ru' if lang=='en' else 'en'}" href="{route('ru' if lang=='en' else 'en',project)}">{c['lang']}</a></header>'''
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="/assets/fonts/GoogleSansFlex-subset.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/tokens.css"><link rel="stylesheet" href="/assets/style.css"><script src="/assets/site.js" defer></script><script type="application/ld+json">{json.dumps(schema,ensure_ascii=False)}</script></head><body><a class="skip" href="#main">{c['skip']}</a><aside class="rail"><a class="rail-mark state-layer" href="{route(lang)}" aria-label="Velmi1337 — {u['home']}">V.</a><nav aria-label="{'Main navigation' if lang=='en' else 'Основная навигация'}">'''
+ for key,label,glyph in [('',u['home'],'home'),('ctsv','CTSV','android'),('alol','ALOL','computer')]:
+  current=' aria-current="page"' if key==project else ''
+  html+=f'<a class="rail-item" href="{route(lang,key)}"{current}><span class="nav-indicator state-layer">{icon(glyph)}</span><span>{label}</span></a>'
+ html+=f'''</nav><a class="rail-bottom icon-button state-layer" href="{GH}" aria-label="GitHub">{icon('code')}</a></aside><div class="site"><div class="wrap"><header class="top"><a class="brand" href="{route(lang)}"><span class="brand-dot" aria-hidden="true"></span>Velmi1337</a><div class="top-actions"><a class="language state-layer" lang="{'ru' if lang=='en' else 'en'}" hreflang="{'ru' if lang=='en' else 'en'}" href="{route('ru' if lang=='en' else 'en',project)}">{icon('language')}{c['lang']}</a><button class="icon-button state-layer" type="button" data-js data-open-appearance aria-label="{u['appearance']}" title="{u['appearance']}">{icon('palette')}</button></div></header>'''
+ return html
+
+def appearance(lang):
+ u=UI[lang]
+ modes=''.join(f'<button class="state-layer" type="button" data-set-mode="{name}" aria-pressed="false">{icon(glyph)}<span>{u[label]}</span></button>' for name,label,glyph in [('auto','auto','settings_brightness'),('light','light','light_mode'),('dark','dark','dark_mode')])
+ seeds={'lavender':'#6750A4','mint':'#006C4C','sky':'#00639B','rose':'#984061'}
+ colors=''.join(f'<button type="button" data-set-palette="{key}" aria-label="{u[key]}" title="{u[key]}" aria-pressed="false" style="--swatch:{value}">{icon("check")}</button>' for key,value in seeds.items())
+ return f'''<dialog id="appearance" aria-labelledby="appearance-title"><div class="dialog-top"><h2 id="appearance-title">{u['appearance']}</h2><button class="icon-button state-layer" type="button" data-close-appearance aria-label="{u['close']}">{icon('close')}</button></div><fieldset><legend>{u['theme']}</legend><div class="segmented">{modes}</div></fieldset><fieldset><legend>{u['colors']}</legend><div class="swatches">{colors}</div></fieldset><p class="dialog-help">{u['appearance_help']}</p></dialog>'''
 
 def foot(lang):
- c=COPY[lang]
- return f'''<footer class="footer"><span>{c['footer']}</span><div><a href="{GH}">GitHub</a><a href="{GH}/velmi1337.github.io">{c['site_source']}</a></div></footer></div></body></html>'''
+ c=COPY[lang];u=UI[lang]
+ return f'''<footer class="footer"><span>{c['footer']}</span><div class="footer-links"><a href="{GH}">GitHub</a><a href="{GH}/velmi1337.github.io/blob/main/docs/design.md">{u['design']}</a><a href="{GH}/velmi1337.github.io">{c['site_source']}</a></div></footer></div></div>{appearance(lang)}</body></html>'''
 
-def btn(url,text,secondary=False):return f'<a class="button{" secondary" if secondary else ""}" href="{url}">{e(text)} <span aria-hidden="true">↗</span></a>'
+def btn(url,text,secondary=False,glyph='arrow_outward',large=False):
+ return f'<a class="button state-layer{" secondary" if secondary else ""}{" large" if large else ""}" href="{url}">{icon(glyph)}<span>{e(text)}</span></a>'
+
 def screenshot(lang,project):
  c=COPY[lang];src='ctsv-'+lang+'.png' if project=='ctsv' else 'alol.png';kind='phone' if project=='ctsv' else 'desktop';w,h=(1080,1920) if project=='ctsv' else (900,843)
- return f'<div class="shot {kind}"><img src="/assets/{src}" alt="{e(c[project+"_alt"],quote=True)}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>'
+ return f'<div class="shot {kind}">{shape_decoration()}<img src="/assets/{src}" alt="{e(c[project+"_alt"],quote=True)}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>'
 def paragraph(text):return '<p>'+e(text)+'</p>'
 def documentation(lang,project):return GH+'/'+project.upper()+'/blob/main/'+('README_ru.md' if project=='ctsv' and lang=='ru' else 'README_EN.md' if project=='alol' and lang=='en' else 'README.md')
+def numbered_steps(items):return '<ol class="start-list">'+''.join('<li><span class="step-number" aria-hidden="true"></span><div>'+e(step)+'</div></li>' for step in items)+'</ol>'
 
 def home(lang):
- c=COPY[lang]
- html=head(lang)+f'''<main id="main"><section class="hero"><div><div class="eyebrow">{c['eyebrow']}</div><h1>{c['hero']}</h1><p class="lead">{c['lead']}</p><div class="actions">{btn('#projects',c['explore'])}{btn(GH,c['github'],True)}</div></div><div class="index"><a href="{route(lang,'ctsv')}"><span class="number">01</span><div><strong>CTSV</strong><small>{c['ctsv_platform']}</small></div><span aria-hidden="true">↗</span></a><a href="{route(lang,'alol')}"><span class="number">02</span><div><strong>ALOL</strong><small>{c['alol_platform']}</small></div><span aria-hidden="true">↗</span></a></div></section><section id="projects"><div class="section-title"><h2>{c['projects_title']}</h2><span class="small">{c['projects_subtitle']}</span></div>'''
+ c=COPY[lang];u=UI[lang]
+ html=head(lang)+f'''<main id="main"><section class="hero"><div><div class="eyebrow">{icon('code')}{u['eyebrow']}</div><h1>{u['hero']}</h1><p class="lead">{c['lead']}</p><div class="actions">{btn('#projects',c['explore'],glyph='apps',large=True)}{btn(GH,c['github'],True,glyph='code',large=True)}</div></div><div class="hero-art"><div class="identity-card">{avatar(lang)}<div class="identity-copy"><span>{u['hello']}</span><br><strong>Velmi1337</strong><p>{u['creator']}</p><a class="mini-link" href="{GH}">{u['profile']}{icon('arrow_outward')}</a></div></div><a class="hero-tile state-layer" href="{route(lang,'ctsv')}"><span class="tile-icon">{icon('search')}{icon('arrow_outward')}</span><strong>CTSV</strong><small>Android · Circle to Search</small></a><a class="hero-tile state-layer" href="{route(lang,'alol')}"><span class="tile-icon">{icon('terminal')}{icon('arrow_outward')}</span><strong>ALOL</strong><small>Linux · Arizona RP</small></a></div></section><section id="projects"><div class="section-title reveal"><div><div class="eyebrow">{icon('favorite')}{u['project_eyebrow']}</div><h2>{c['projects_title']}</h2></div><p class="small">{u['project_count']}</p></div>'''
  for project in ['ctsv','alol']:
-  html+=f'''<article class="project {project}"><div class="project-copy"><span class="label">{c[project+'_platform']}</span><h2>{project.upper()}<br>{c[project+'_summary']}</h2><p class="lead">{c[project+'_text']}</p><div class="tags">{''.join('<span>'+e(tag)+'</span>' for tag in c[project+'_tags'])}</div><div class="actions">{btn(route(lang,project),c[project+'_explore'])}{btn(GH+'/'+project.upper()+'/releases/latest',c['download'],True)}</div></div>{screenshot(lang,project)}</article>'''
- html+=f'''</section><section class="steps"><h2>{c['start_title']}</h2><ol>{''.join('<li><strong>'+e(title)+'</strong><p>'+e(text)+'</p></li>' for title,text in c['start_steps'])}</ol></section></main>'''+foot(lang)
+  glyph='search' if project=='ctsv' else 'terminal'
+  html+=f'''<article class="project {project} reveal"><div class="project-copy"><div class="project-top"><span class="app-icon">{icon(glyph)}</span><div><div class="project-name">{project.upper()}</div><span class="small">{c[project+'_platform']}</span></div></div><h2>{c[project+'_summary']}</h2><p class="lead">{c[project+'_text']}</p><div class="tags">{''.join('<span>'+e(tag)+'</span>' for tag in c[project+'_tags'])}</div><div class="actions">{btn(route(lang,project),u['learn_more'],glyph='arrow_forward')}{btn(GH+'/'+project.upper()+'/releases/latest',c['download'],True,glyph='download')}</div></div>{screenshot(lang,project)}</article>'''
+ steps=''.join('<li><span class="step-number" aria-hidden="true"></span><div><strong>'+e(title)+'</strong><p>'+e(text)+'</p></div></li>' for title,text in c['start_steps'])
+ html+=f'''</section><section class="start-section reveal"><div><div class="eyebrow">{icon('touch_app')}{u['setup']}</div><h2>{c['start_title']}</h2></div><ol class="start-list">{steps}</ol></section><section class="closing reveal"><div><h2>{u['footer_cta']}</h2><p>{u['footer_text']}</p></div><div class="actions">{btn('#projects',u['feedback'],glyph='arrow_forward')}</div></section></main>'''+foot(lang)
  return html
 
 def detail(lang,project):
- c=COPY[lang];repo=GH+'/'+project.upper()
- html=head(lang,project)+f'''<main id="main"><section class="detail-hero"><div><div class="breadcrumb"><a href="{route(lang)}">{c['back']}</a> / {project.upper()}</div><span class="label">{c[project+'_platform']}</span><h1 style="margin-top:24px">{c[project+'_heading']}</h1><p class="lead">{c[project+'_intro']}</p><div class="actions">{btn(repo+'/releases/latest',c['download'])}{btn(repo,c['code'],True)}</div><p class="small">{c[project+'_requirement']}</p></div>{screenshot(lang,project)}</section><section class="article columns"><h2>{c[project+'_setup_heading']}</h2><div><ol>{''.join('<li>'+e(step)+'</li>' for step in c[project+'_steps'])}</ol>{btn(documentation(lang,project),c['docs'],True)}</div></section>'''
+ c=COPY[lang];u=UI[lang];repo=GH+'/'+project.upper();glyph='android' if project=='ctsv' else 'computer'
+ html=head(lang,project)+f'''<main id="main"><div class="breadcrumb"><a href="{route(lang)}">{c['back']}</a>{icon('arrow_forward')}<span>{project.upper()}</span></div><section class="detail-hero"><div><div class="eyebrow">{icon(glyph)}{c[project+'_platform']}</div><h1>{c[project+'_heading']}</h1><p class="lead">{c[project+'_intro']}</p><div class="actions">{btn(repo+'/releases/latest',c['download'],glyph='download',large=True)}{btn(repo,c['code'],True,glyph='code')}</div><p class="small">{c[project+'_requirement']}</p></div>{screenshot(lang,project)}</section><section class="article columns reveal"><div><div class="eyebrow">{icon('touch_app')}{u['setup']}</div><h2>{c[project+'_setup_heading']}</h2></div><div>{numbered_steps(c[project+'_steps'])}{btn(documentation(lang,project),c['docs'],True,glyph='arrow_forward')}</div></section>'''
  if project=='ctsv':
-  html+=f'''<section class="article"><h2>{c['triggers_heading']}</h2><div class="table-wrap"><table><thead><tr>{''.join('<th scope="col">'+e(h)+'</th>' for h in c['trigger_headers'])}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+e(cell)+'</td>' for cell in row)+'</tr>' for row in c['trigger_rows'])}</tbody></table></div></section><section class="article columns"><h2>{c['ctsv_tuning_heading']}</h2><div>{''.join(paragraph(p) for p in c['ctsv_tuning'])}</div></section><section class="article columns"><h2>{c['ctsv_limits_heading']}</h2><div>{paragraph(c['ctsv_limits'])}<div class="notice">{e(c['ctsv_links'])}</div></div></section>'''
+  html+=f'''<section class="article reveal"><h2>{c['triggers_heading']}</h2><div class="table-wrap"><table><thead><tr>{''.join('<th scope="col">'+e(h)+'</th>' for h in c['trigger_headers'])}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+e(cell)+'</td>' for cell in row)+'</tr>' for row in c['trigger_rows'])}</tbody></table></div></section><section class="article columns reveal"><h2>{c['ctsv_tuning_heading']}</h2><div class="feature-list">{''.join('<div class="feature-row">'+paragraph(p)+'</div>' for p in c['ctsv_tuning'])}</div></section><section class="article columns reveal"><h2>{c['ctsv_limits_heading']}</h2><div>{paragraph(c['ctsv_limits'])}<div class="notice">{icon('info')}{paragraph(c['ctsv_links'])}</div></div></section>'''
  else:
-  html+=f'''<section class="article columns"><h2>{c['alol_features_heading']}</h2><div>{''.join('<h3 style="margin-top:24px">'+e(title)+'</h3>'+paragraph(text) for title,text in c['alol_features'])}</div></section><section class="article columns"><h2>{c['alol_limits_heading']}</h2><div>{paragraph(c['alol_limits'])}{paragraph(c['alol_license'])}<p class="small">{e(c['alol_demo'])}</p><p><a href="https://t.me/alolinux">{c['alol_community']}</a></p></div></section>'''
- html+=f'''<section class="article columns"><h2>{c['feedback']}</h2><div>{paragraph(c['feedback_text'])}<div class="actions">{btn(repo+'/issues',c['issues'],True)}{btn(documentation(lang,project),c['docs'],True)}</div></div></section></main>'''+foot(lang)
+  html+=f'''<section class="article columns reveal"><h2>{c['alol_features_heading']}</h2><div class="feature-list">{''.join('<div class="feature-row"><h3>'+e(title)+'</h3>'+paragraph(text)+'</div>' for title,text in c['alol_features'])}</div></section><section class="article columns reveal"><h2>{c['alol_limits_heading']}</h2><div>{paragraph(c['alol_limits'])}<div class="notice">{icon('info')}{paragraph(c['alol_license'])}</div><p class="small">{e(c['alol_demo'])}</p><p><a href="https://t.me/alolinux">{c['alol_community']}</a></p></div></section>'''
+ html+=f'''<section class="closing reveal"><div><h2>{c['feedback']}</h2><p>{c['feedback_text']}</p></div><div class="actions">{btn(repo+'/issues',c['issues'],glyph='forum')}</div></section></main>'''+foot(lang)
  return html
 
 if __name__=='__main__':
@@ -142,8 +179,8 @@ if __name__=='__main__':
    path=ROOT/route(lang,project).lstrip('/')/'index.html';path.parent.mkdir(parents=True,exist_ok=True)
    path.write_text(home(lang) if not project else detail(lang,project))
  urls=[BASE+route(lang,project) for lang in ['en','ru'] for project in ['','ctsv','alol']]
- (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('<url><loc>'+u+'</loc></url>\n' for u in urls)+'</urlset>\n')
+ (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('<url><loc>'+url+'</loc></url>\n' for url in urls)+'</urlset>\n')
  (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
- (ROOT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#182b2b"/><path d="M12 12 24 36 36 12" fill="none" stroke="#a5edc5" stroke-width="5" stroke-linejoin="round"/></svg>')
+ (ROOT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="16" fill="#e9ddff"/><path d="M12 13 24 36 36 13" fill="none" stroke="#65558f" stroke-width="5" stroke-linejoin="round"/></svg>')
  (ROOT/'404.html').write_text(head('en').replace('name="robots" content="index,follow"','name="robots" content="noindex,follow"')+'<main id="main" class="not-found"><div class="eyebrow">404</div><h1>Page not found.<br>Страница не найдена.</h1><div class="actions">'+btn('/','Projects')+btn('/ru/','Проекты',True)+'</div></main>'+foot('en'))
- print('Generated six localized pages, sitemap, robots and a 404 page')
+ print('Generated six bilingual Material 3 Expressive pages and 404')
