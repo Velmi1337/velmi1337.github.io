@@ -42,7 +42,8 @@ The root hex-named text file is a **public IndexNow ownership key**, not a priva
 Website text/layout/generator: GPL-3.0-only, see [LICENSE](LICENSE).
 CTSV screenshots come from the GPL-3.0-only [CTSV repository](https://github.com/Velmi1337/CTSV).
 ALOL logo/screenshot come from [ALOL](https://github.com/Velmi1337/ALOL), copyright 2026 ALOL contributors, author Velmi1337.
-They retain applicable Apache-2.0 notices; see [LICENSES/Apache-2.0.txt](LICENSES/Apache-2.0.txt).
+They retain applicable Apache-2.0 notices; see [LICENSES/Apache-2.0.txt](LICENSES/Apache-2.0.txt)
+and the preserved [ALOL NOTICE](assets/NOTICE.ALOL).
 The source images are copied unchanged. Documentation/screenshots show interfaces and do not invent tested live searches or game sessions.
 No endorsement by Google, phone manufacturers or Arizona Games is implied.
 
