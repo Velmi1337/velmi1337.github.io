@@ -59,3 +59,14 @@ https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recraw
 
 Первый ориентир — полезные отзывы и подтверждённые установки. Число просмотров и позиции в поиске не обещаются.
 Сообщения в сообщества и сторонним людям автоматически не отправляются.
+
+
+## Sitemap fetch troubleshooting / Ошибка загрузки Sitemap
+
+The XML sitemap remains at `/sitemap.xml`. A UTF-8 text sitemap at `/sitemap.txt` is generated from the same canonical URL list and also advertised in robots.txt. Google supports both formats. The alternate address is a diagnostic fallback, not a confirmed fix for a Search Console fetch failure or a guarantee of indexing.
+
+If the old report remains unchanged, submit `https://velmi1337.github.io/sitemap.txt` in the verified property. Inspect the original sitemap URL with Search Console → Test live URL, then expand Page availability and check Page fetch and Crawl allowed. An ordinary HTTP 200 response, including a request with a Googlebot user agent, does not prove that Google's actual crawler can reach the site. GitHub Pages does not expose crawler access logs here. Check Manual actions and Security issues if the live fetch fails or reports restrictions.
+
+Текстовая карта `sitemap.txt` содержит те же страницы, что XML. Если старый отчёт не обновляется, отправьте новый адрес в разделе «Файлы Sitemap». Затем проверьте исходный адрес через «Проверка URL» → «Проверить опубликованную страницу» и раскройте сведения о доступности страницы. Важны результаты загрузки и разрешение сканирования. Новый формат не гарантирует исправления ошибки Google или индексации.
+
+References: [Google sitemap formats](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), [Search Console troubleshooting](https://support.google.com/webmasters/answer/7451001).

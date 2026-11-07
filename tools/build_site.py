@@ -180,7 +180,8 @@ if __name__=='__main__':
    path.write_text(home(lang) if not project else detail(lang,project))
  urls=[BASE+route(lang,project) for lang in ['en','ru'] for project in ['','ctsv','alol']]
  (ROOT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join('<url><loc>'+url+'</loc></url>\n' for url in urls)+'</urlset>\n')
- (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\n')
+ (ROOT/'sitemap.txt').write_text('\n'.join(urls)+'\n', encoding='utf-8')
+ (ROOT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'/sitemap.xml\nSitemap: '+BASE+'/sitemap.txt\n', encoding='utf-8')
  (ROOT/'assets/favicon.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="16" fill="#e9ddff"/><path d="M12 13 24 36 36 13" fill="none" stroke="#65558f" stroke-width="5" stroke-linejoin="round"/></svg>')
  (ROOT/'404.html').write_text(head('en').replace('name="robots" content="index,follow"','name="robots" content="noindex,follow"')+'<main id="main" class="not-found"><div class="eyebrow">404</div><h1>Page not found.<br>Страница не найдена.</h1><div class="actions">'+btn('/','Projects')+btn('/ru/','Проекты',True)+'</div></main>'+foot('en'))
  print('Generated six bilingual Material 3 Expressive pages and 404')
