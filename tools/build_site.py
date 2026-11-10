@@ -7,6 +7,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://velmi1337.github.io'
+AUR='https://aur.archlinux.org/packages/alol'
 GH='https://github.com/Velmi1337'
 COPY={'en': {'home': 'Projects',
         'lang': 'Русский',
@@ -19,9 +20,8 @@ COPY={'en': {'home': 'Projects',
         'site_source': 'Website source',
         'skip': 'Skip to content',
         'title': 'Velmi1337 — CTSV for Android & ALOL for Arizona RP and Rodina RP on Linux',
-        'description': 'Open-source projects by Velmi1337: CTSV for Circle to Search on Android and ALOL '
-                       '1.0.0 for Arizona RP and Rodina RP on Linux. Material 3 Expressive, downloads and '
-                       'guides.',
+        'description': 'Open-source projects by Velmi1337: CTSV for Android and ALOL 1.0.1 for Arizona RP '
+                       'and Rodina RP on Linux. ALOL is available on AUR, as AppImage and native packages.',
         'hero': 'Android search.<br>Linux gaming.',
         'lead': 'Two open-source tools by Velmi1337: Circle to Search on Android with CTSV, and Arizona RP '
                 'or Rodina RP on Linux with ALOL.',
@@ -37,16 +37,17 @@ COPY={'en': {'home': 'Projects',
         'ctsv_platform': 'Android 9+ · no root',
         'ctsv_tags': ['Quick Settings', 'Hold gestures', 'GPL-3.0-only'],
         'alol_summary': 'Arizona RP. Rodina RP. Linux.',
-        'alol_text': 'ALOL 1.0.0 is the first stable release: a native Rust/GTK 3 launcher with Material 3 '
-                     'Expressive, Wine/Proton, separate game settings and a reversible mod manager.',
+        'alol_text': 'ALOL 1.0.1 brings Arizona RP and Rodina RP to Linux with Material 3 Expressive, '
+                     'Wine/Proton and reversible mod management. Install alol from AUR or choose an AppImage '
+                     'or native package.',
         'alol_explore': 'Explore ALOL',
         'alol_platform': 'Linux · x86_64',
-        'alol_tags': ['1.0.0 stable', 'Material 3 Expressive', 'Arizona + Rodina'],
+        'alol_tags': ['1.0.1 stable', 'AUR', 'AppImage', 'Material 3 Expressive'],
         'start_title': 'Start with a release.',
         'start_steps': [('Choose your platform', 'CTSV is for Android. ALOL is for Linux on x86_64.'),
-                        ('Download from the project’s GitHub',
-                         'Release pages contain binaries and checksums. Each project documents its own setup '
-                         'requirements.'),
+                        ('Choose an installation method',
+                         'ALOL is available on AUR, as AppImage and native packages. CTSV APKs are on '
+                         'GitHub. Each project documents its setup requirements.'),
                         ('Help make it better',
                          'Found a reproducible problem? Open an issue with the app version, device or '
                          'distribution, and steps to reproduce.')],
@@ -99,23 +100,23 @@ COPY={'en': {'home': 'Projects',
                        'handle.',
         'ctsv_links': 'Read the detailed setup, battery behavior, privacy notes and test scope in the '
                       'project documentation. CTSV is independent of Google and phone manufacturers.',
-        'alol_title': 'ALOL 1.0.0 — Arizona RP and Rodina RP on Linux · MD3E',
-        'alol_description': 'The first stable ALOL release: Arizona RP and Rodina RP on Linux with Material '
-                            '3 Expressive (MD3E), light/dark themes, Wine/Proton, mods, logs and launcher '
-                            'updates.',
-        'alol_heading': 'ALOL 1.0.0. Two games. One launcher.',
-        'alol_intro': 'The first stable release brings Arizona RP and Rodina RP together on Linux. A '
-                      'Material 3 Expressive interface keeps servers, game settings, mods and diagnostics '
-                      'within reach.',
-        'alol_alt': 'ALOL 1.0.0 Material 3 Expressive interface with Arizona RP and Rodina RP selection, '
-                    'server and launch actions',
+        'alol_title': 'ALOL 1.0.1 — Arizona RP and Rodina RP on Linux · AUR and AppImage',
+        'alol_description': 'ALOL 1.0.1 for Arizona RP and Rodina RP on Linux. Install alol from AUR with '
+                            'yay or paru, or download AppImage and Fedora packages. Material 3 Expressive '
+                            'interface.',
+        'alol_heading': 'ALOL 1.0.1. Two games. One launcher.',
+        'alol_intro': 'Play Arizona RP and Rodina RP on Linux with a Material 3 Expressive launcher. Now '
+                      'available on AUR as alol, with AppImage and native packages for other setups.',
+        'alol_alt': 'ALOL Material 3 Expressive interface with Arizona RP and Rodina RP selection, server '
+                    'and launch actions',
         'alol_requirement': 'For Linux x86_64. Game files and Windows components are not bundled. You need '
                             'the official Arizona installer, an appropriate Wine/Proton environment and '
                             'suitable graphics drivers.',
         'alol_setup_heading': 'Get a game environment ready.',
-        'alol_steps': ['Download ALOL 1.0.0 for your platform: Arch/CachyOS, Fedora 44+, or the standalone '
-                       'x86_64 executable.',
-                       'Install using the guide. Choose light or dark appearance in Settings → Launcher.',
+        'alol_steps': ['Install alol from AUR using yay or paru, or download an AppImage, Fedora 44+ RPM or '
+                       'Arch/CachyOS package.',
+                       'Follow the installation guide. Choose light or dark appearance in Settings → '
+                       'Launcher.',
                        'Select the official Arizona Games installer in ALOL, then download the selected game '
                        'through the official launcher.',
                        'Close the official launcher, choose Arizona RP or Rodina RP and a server, then '
@@ -138,10 +139,11 @@ COPY={'en': {'home': 'Projects',
                            'Prepare fonts and components, keep Russian locale local to the game, repair '
                            'common issues with backups, and check for ALOL updates.')],
         'alol_limits_heading': 'Read the requirements first.',
-        'alol_limits': 'Published packages target Linux x86_64, with instructions for Arch/CachyOS and '
-                       'Fedora 44+. Runtime and graphics compatibility vary. The launcher is independent of '
-                       'Arizona Games and does not include the game.',
-        'alol_license': 'ALOL 1.0.0 code is Apache-2.0. Bundled Google Sans is OFL-1.1; the optional Wine '
+        'alol_limits': 'ALOL targets Linux x86_64. AUR builds require multilib and base-devel; AppImage '
+                       'requires glibc 2.35+ (Ubuntu 22.04+). Fedora packages target 44+. Playing requires '
+                       'Wine/Proton and suitable drivers. ALOL is independent of Arizona Games and does not '
+                       'include the game.',
+        'alol_license': 'ALOL 1.0.1 code is Apache-2.0. Bundled Google Sans is OFL-1.1; the optional Wine '
                         'patch is LGPL-2.1-or-later with corresponding source. Earlier tags retain their own '
                         'licenses.',
         'alol_demo': 'The screenshot uses the project’s demonstration profile. It shows the interface, not a '
@@ -149,7 +151,15 @@ COPY={'en': {'home': 'Projects',
         'alol_community': 'Release news and updates: @alolinux on Telegram.',
         'feedback': 'Have a specific question or bug?',
         'feedback_text': 'Read the setup guide first, then describe what you tried and what happened. Useful '
-                         'reports help improve the project.'},
+                         'reports help improve the project.',
+        'aur_label': 'Install from AUR',
+        'aur_heading': 'ALOL is available on AUR.',
+        'aur_text': 'On Arch Linux and CachyOS, install the alol package. Enable multilib and install '
+                    'base-devel; your AUR helper resolves the build and runtime dependencies.',
+        'aur_or': 'Or use',
+        'aur_update': 'Update with',
+        'aur_other': 'AppImage and native Arch/CachyOS and Fedora packages are also available on GitHub. '
+                     'Wine/Proton and graphics drivers are needed to play.'},
  'ru': {'home': 'Проекты',
         'lang': 'English',
         'code': 'Исходный код',
@@ -161,8 +171,8 @@ COPY={'en': {'home': 'Projects',
         'site_source': 'Исходники сайта',
         'skip': 'Перейти к содержимому',
         'title': 'Velmi1337 — CTSV для Android и ALOL для Arizona RP и Родины RP на Linux',
-        'description': 'Открытые проекты Velmi1337: CTSV для Circle to Search на Android и ALOL 1.0.0 для '
-                       'Arizona RP и Родины RP на Linux. Material 3 Expressive, загрузки и инструкции.',
+        'description': 'Открытые проекты Velmi1337: CTSV для Android и ALOL 1.0.1 для Arizona RP и Родины RP '
+                       'на Linux. ALOL доступен в AUR, как AppImage и в пакетах для дистрибутивов.',
         'hero': 'Поиск на Android.<br>Игры на Linux.',
         'lead': 'Два открытых проекта Velmi1337: поиск на Android через CTSV и Arizona RP или Родина RP на '
                 'Linux через ALOL.',
@@ -178,16 +188,17 @@ COPY={'en': {'home': 'Projects',
         'ctsv_platform': 'Android 9+ · без root',
         'ctsv_tags': ['Плитка в шторке', 'Удержание зоны', 'GPL-3.0-only'],
         'alol_summary': 'Arizona RP. Родина RP. Linux.',
-        'alol_text': 'ALOL 1.0.0 — первый стабильный релиз: нативный лаунчер на Rust/GTK 3 с Material 3 '
-                     'Expressive, Wine/Proton, отдельными настройками игр и управлением модами с откатом.',
+        'alol_text': 'ALOL 1.0.1 объединяет Arizona RP и Родину RP на Linux: Material 3 Expressive, '
+                     'Wine/Proton и моды с откатом. Устанавливайте alol из AUR или выбирайте AppImage и '
+                     'готовые пакеты.',
         'alol_explore': 'Подробнее об ALOL',
         'alol_platform': 'Linux · x86_64',
-        'alol_tags': ['Стабильная 1.0.0', 'Material 3 Expressive', 'Arizona + Родина'],
+        'alol_tags': ['1.0.1 stable', 'AUR', 'AppImage', 'Material 3 Expressive'],
         'start_title': 'Начните с релиза.',
         'start_steps': [('Выберите платформу', 'CTSV предназначен для Android, ALOL — для Linux x86_64.'),
-                        ('Скачайте с GitHub проекта',
-                         'В релизах есть файлы и контрольные суммы. Для каждого проекта описаны собственные '
-                         'требования к настройке.'),
+                        ('Выберите способ установки',
+                         'ALOL доступен в AUR, как AppImage и в пакетах для дистрибутивов. APK CTSV доступны '
+                         'на GitHub. Требования описаны в инструкциях проектов.'),
                         ('Помогите улучшить проект',
                          'Нашли воспроизводимую ошибку? Укажите версию, устройство или дистрибутив и шаги '
                          'воспроизведения в issue.')],
@@ -238,22 +249,23 @@ COPY={'en': {'home': 'Projects',
                        'нужно проверять на телефоне. Зона не заменяет системную полоску «Домой».',
         'ctsv_links': 'Подробные инструкции, описание фоновой работы, приватности и проверок доступны в '
                       'репозитории. CTSV не связан с Google или производителями телефонов.',
-        'alol_title': 'ALOL 1.0.0 — Arizona RP и Родина RP на Linux · MD3E',
-        'alol_description': 'Первый стабильный ALOL: Arizona RP и Родина RP на Linux, интерфейс Material 3 '
-                            'Expressive (MD3E), светлая/тёмная тема, Wine/Proton, моды, журнал и обновления.',
-        'alol_heading': 'ALOL 1.0.0. Две игры. Один лаунчер.',
-        'alol_intro': 'Первый стабильный релиз объединяет Arizona RP и Родину RP на Linux. Интерфейс '
-                      'Material 3 Expressive помогает быстро выбрать сервер, настроить игру, установить моды '
-                      'и разобраться с ошибками.',
-        'alol_alt': 'ALOL 1.0.0 с интерфейсом Material 3 Expressive: переключатель Arizona RP и Родины RP, '
-                    'сервер и запуск игры',
+        'alol_title': 'ALOL 1.0.1 — Arizona RP и Родина RP на Linux · AUR и AppImage',
+        'alol_description': 'ALOL 1.0.1 для Arizona RP и Родины RP на Linux. Пакет alol в AUR: установка '
+                            'через yay или paru. Также доступны AppImage и Fedora RPM. Интерфейс Material 3 '
+                            'Expressive.',
+        'alol_heading': 'ALOL 1.0.1. Две игры. Один лаунчер.',
+        'alol_intro': 'Запускайте Arizona RP и Родину RP на Linux с лаунчером в стиле Material 3 Expressive. '
+                      'Теперь ALOL есть в AUR под именем alol; также доступны AppImage и готовые пакеты.',
+        'alol_alt': 'ALOL с интерфейсом Material 3 Expressive: переключатель Arizona RP и Родины RP, сервер '
+                    'и запуск игры',
         'alol_requirement': 'Для Linux x86_64. Игра и Windows-компоненты в пакет не входят. Нужны '
                             'официальный установщик Arizona, подходящее окружение Wine/Proton и графические '
                             'драйверы.',
         'alol_setup_heading': 'Подготовьте игровое окружение.',
-        'alol_steps': ['Скачайте ALOL 1.0.0: пакет для Arch/CachyOS, Fedora 44+ или отдельный '
-                       'x86_64-бинарник.',
-                       'Установите по инструкции. Светлая и тёмная темы доступны в «Настройки → Лаунчер».',
+        'alol_steps': ['Установите alol из AUR через yay или paru либо скачайте AppImage, RPM для Fedora 44+ '
+                       'или пакет Arch/CachyOS.',
+                       'Следуйте инструкции установки. Светлая и тёмная темы доступны в «Настройки → '
+                       'Лаунчер».',
                        'Выберите официальный установщик Arizona Games в ALOL, затем скачайте выбранную игру '
                        'через официальный лаунчер.',
                        'Закройте официальный лаунчер, выберите Arizona RP или Родину RP, сервер и запустите '
@@ -277,10 +289,11 @@ COPY={'en': {'home': 'Projects',
                            'Подготовка шрифтов и компонентов, русская локаль только для игры, исправление '
                            'типичных проблем с резервными копиями и обновления ALOL.')],
         'alol_limits_heading': 'Сначала проверьте требования.',
-        'alol_limits': 'Опубликованные пакеты предназначены для Linux x86_64; есть инструкции для '
-                       'Arch/CachyOS и Fedora 44+. Совместимость зависит от рантайма и драйверов. ALOL '
-                       'независим от Arizona Games и не содержит игру.',
-        'alol_license': 'Код ALOL 1.0.0 — Apache-2.0. Google Sans — OFL-1.1, дополнительный патч Wine — '
+        'alol_limits': 'ALOL предназначен для Linux x86_64. Для AUR нужны multilib и base-devel; для '
+                       'AppImage — glibc 2.35+ (Ubuntu 22.04+). RPM предназначен для Fedora 44+. Для игры '
+                       'нужны Wine/Proton и подходящие драйверы. ALOL независим от Arizona Games и не '
+                       'содержит игру.',
+        'alol_license': 'Код ALOL 1.0.1 — Apache-2.0. Google Sans — OFL-1.1, дополнительный патч Wine — '
                         'LGPL-2.1-or-later с полными изменёнными исходниками. Старые теги сохраняют свои '
                         'лицензии.',
         'alol_demo': 'Скриншот сделан с демонстрационным профилем: он показывает интерфейс, а не '
@@ -288,7 +301,15 @@ COPY={'en': {'home': 'Projects',
         'alol_community': 'Новости и обновления проекта — @alolinux в Telegram.',
         'feedback': 'Есть вопрос или ошибка?',
         'feedback_text': 'Сначала проверьте инструкцию, затем опишите свои действия и результат. Подробные '
-                         'сообщения помогают улучшать проект.'}}
+                         'сообщения помогают улучшать проект.',
+        'aur_label': 'Установить из AUR',
+        'aur_heading': 'ALOL теперь в AUR.',
+        'aur_text': 'На Arch Linux и CachyOS доступен пакет alol. Включите multilib и установите base-devel; '
+                    'зависимости для сборки и запуска установит AUR-помощник.',
+        'aur_or': 'Или используйте',
+        'aur_update': 'Обновление',
+        'aur_other': 'AppImage и готовые пакеты Arch/CachyOS и Fedora доступны на GitHub. Для игры нужны '
+                     'Wine/Proton и графические драйверы.'}}
 
 def route(lang,project=''):
  return ('/ru/' if lang=='ru' else '/')+(project+'/' if project else '')
@@ -318,7 +339,7 @@ def head(lang,project=''):
  image=BASE+'/assets/social.png'
  alternates=''.join(f'<link rel="alternate" hreflang="{lng}" href="{BASE+route(lng,project)}">' for lng in ['en','ru'])+f'<link rel="alternate" hreflang="x-default" href="{BASE+route("en",project)}">'
  if project:
-  schema={'@context':'https://schema.org','@type':'SoftwareApplication','name':project.upper(),'url':url,'description':desc,'operatingSystem':'Android' if project=='ctsv' else 'Linux','applicationCategory':'UtilitiesApplication' if project=='ctsv' else 'GameApplication',**({'softwareVersion':'1.0.0'} if project=='alol' else {}), 'downloadUrl':GH+'/'+project.upper()+'/releases/latest','isAccessibleForFree':True,'author':{'@type':'Person','name':'Velmi1337','url':GH},'license':GH+'/'+project.upper()+'/blob/main/LICENSE'}
+  schema={'@context':'https://schema.org','@type':'SoftwareApplication','name':project.upper(),'url':url,'description':desc,'operatingSystem':'Android' if project=='ctsv' else 'Linux','applicationCategory':'UtilitiesApplication' if project=='ctsv' else 'GameApplication',**({'softwareVersion':'1.0.1'} if project=='alol' else {}), 'downloadUrl':GH+'/'+project.upper()+'/releases/latest','isAccessibleForFree':True,'author':{'@type':'Person','name':'Velmi1337','url':GH},'license':GH+'/'+project.upper()+'/blob/main/LICENSE'}
  else:schema={'@context':'https://schema.org','@type':'WebSite','name':'Velmi1337 projects','url':url,'inLanguage':lang,'description':desc}
  boot='''(()=>{try{const m=localStorage.getItem('velmi-md3-mode'),p=localStorage.getItem('velmi-md3-palette');document.documentElement.dataset.mode=['light','dark','auto'].includes(m)?m:'auto';document.documentElement.dataset.palette=['lavender','mint','sky','rose'].includes(p)?p:'lavender'}catch{}})();'''
  html=f'''<!doctype html>
@@ -347,7 +368,7 @@ def btn(url,text,secondary=False,glyph='arrow_outward',large=False):
  return f'<a class="button state-layer{" secondary" if secondary else ""}{" large" if large else ""}" href="{url}">{icon(glyph)}<span>{e(text)}</span></a>'
 
 def screenshot(lang,project):
- c=COPY[lang];src='ctsv-'+lang+'.png' if project=='ctsv' else 'alol.png?v=1.0.0';kind='phone' if project=='ctsv' else 'desktop';w,h=(1080,1920) if project=='ctsv' else (960,740)
+ c=COPY[lang];src='ctsv-'+lang+'.png' if project=='ctsv' else 'alol.png?v=1.0.1';kind='phone' if project=='ctsv' else 'desktop';w,h=(1080,1920) if project=='ctsv' else (960,740)
  return f'<div class="shot {kind}">{shape_decoration()}<img src="/assets/{src}" alt="{e(c[project+"_alt"],quote=True)}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>'
 def paragraph(text):return '<p>'+e(text)+'</p>'
 def documentation(lang,project):return GH+'/'+project.upper()+'/blob/main/'+('README_ru.md' if project=='ctsv' and lang=='ru' else 'README_EN.md' if project=='alol' and lang=='en' else 'README.md')
@@ -358,14 +379,18 @@ def home(lang):
  html=head(lang)+f'''<main id="main"><section class="hero"><div><div class="eyebrow">{icon('code')}{u['eyebrow']}</div><h1>{u['hero']}</h1><p class="lead">{c['lead']}</p><div class="actions">{btn('#projects',c['explore'],glyph='apps',large=True)}{btn(GH,c['github'],True,glyph='code',large=True)}</div></div><div class="hero-art"><div class="identity-card">{avatar(lang)}<div class="identity-copy"><span>{u['hello']}</span><br><strong>Velmi1337</strong><p>{u['creator']}</p><a class="mini-link" href="{GH}">{u['profile']}{icon('arrow_outward')}</a></div></div><a class="hero-tile state-layer" href="{route(lang,'ctsv')}"><span class="tile-icon">{icon('search')}{icon('arrow_outward')}</span><strong>CTSV</strong><small>Android · Circle to Search</small></a><a class="hero-tile state-layer" href="{route(lang,'alol')}"><span class="tile-icon">{icon('terminal')}{icon('arrow_outward')}</span><strong>ALOL</strong><small>Linux · Arizona RP + Rodina RP</small></a></div></section><section id="projects"><div class="section-title reveal"><div><div class="eyebrow">{icon('favorite')}{u['project_eyebrow']}</div><h2>{c['projects_title']}</h2></div><p class="small">{u['project_count']}</p></div>'''
  for project in ['ctsv','alol']:
   glyph='search' if project=='ctsv' else 'terminal'
-  html+=f'''<article class="project {project} reveal"><div class="project-copy"><div class="project-top"><span class="app-icon">{icon(glyph)}</span><div><div class="project-name">{project.upper()}</div><span class="small">{c[project+'_platform']}</span></div></div><h2>{c[project+'_summary']}</h2><p class="lead">{c[project+'_text']}</p><div class="tags">{''.join('<span>'+e(tag)+'</span>' for tag in c[project+'_tags'])}</div><div class="actions">{btn(route(lang,project),u['learn_more'],glyph='arrow_forward')}{btn(GH+'/'+project.upper()+'/releases/latest',c['download'],True,glyph='download')}</div></div>{screenshot(lang,project)}</article>'''
+  html+=f'''<article class="project {project} reveal"><div class="project-copy"><div class="project-top"><span class="app-icon">{icon(glyph)}</span><div><div class="project-name">{project.upper()}</div><span class="small">{c[project+'_platform']}</span></div></div><h2>{c[project+'_summary']}</h2><p class="lead">{c[project+'_text']}</p><div class="tags">{''.join('<span>'+e(tag)+'</span>' for tag in c[project+'_tags'])}</div><div class="actions">{btn(route(lang,project),u['learn_more'],glyph='arrow_forward')}{btn(GH+'/'+project.upper()+'/releases/latest',c['download'],True,glyph='download')}{btn(AUR,c['aur_label'],True,glyph='terminal') if project=='alol' else ''}</div></div>{screenshot(lang,project)}</article>'''
  steps=''.join('<li><span class="step-number" aria-hidden="true"></span><div><strong>'+e(title)+'</strong><p>'+e(text)+'</p></div></li>' for title,text in c['start_steps'])
  html+=f'''</section><section class="start-section reveal"><div><div class="eyebrow">{icon('touch_app')}{u['setup']}</div><h2>{c['start_title']}</h2></div><ol class="start-list">{steps}</ol></section><section class="closing reveal"><div><h2>{u['footer_cta']}</h2><p>{u['footer_text']}</p></div><div class="actions">{btn('#projects',u['feedback'],glyph='arrow_forward')}</div></section></main>'''+foot(lang)
  return html
 
+def aur_install(lang):
+ c=COPY[lang]
+ return f'''<section id="install-aur" class="article columns reveal"><div><div class="eyebrow">{icon('terminal')}AUR</div><h2>{e(c['aur_heading'])}</h2><p><a href="{AUR}">alol</a></p></div><div>{paragraph(c['aur_text'])}<pre class="install-command"><code>yay -S alol</code></pre><p>{e(c['aur_or'])} <code>paru -S alol</code>.</p><p>{e(c['aur_update'])}: <code>yay -Syu</code> / <code>paru -Syu</code>.</p><div class="actions">{btn(AUR,c['aur_label'],True,glyph='terminal')}</div>{paragraph(c['aur_other'])}</div></section>'''
+
 def detail(lang,project):
  c=COPY[lang];u=UI[lang];repo=GH+'/'+project.upper();glyph='android' if project=='ctsv' else 'computer'
- html=head(lang,project)+f'''<main id="main"><div class="breadcrumb"><a href="{route(lang)}">{c['back']}</a>{icon('arrow_forward')}<span>{project.upper()}</span></div><section class="detail-hero"><div><div class="eyebrow">{icon(glyph)}{c[project+'_platform']}</div><h1>{c[project+'_heading']}</h1><p class="lead">{c[project+'_intro']}</p><div class="actions">{btn(repo+'/releases/latest',('Скачать 1.0.0' if lang=='ru' else 'Download 1.0.0') if project=='alol' else c['download'],glyph='download',large=True)}{btn(repo,c['code'],True,glyph='code')}</div><p class="small">{c[project+'_requirement']}</p></div>{screenshot(lang,project)}</section><section class="article columns reveal"><div><div class="eyebrow">{icon('touch_app')}{u['setup']}</div><h2>{c[project+'_setup_heading']}</h2></div><div>{numbered_steps(c[project+'_steps'])}{btn(documentation(lang,project),c['docs'],True,glyph='arrow_forward')}</div></section>'''
+ html=head(lang,project)+f'''<main id="main"><div class="breadcrumb"><a href="{route(lang)}">{c['back']}</a>{icon('arrow_forward')}<span>{project.upper()}</span></div><section class="detail-hero"><div><div class="eyebrow">{icon(glyph)}{c[project+'_platform']}</div><h1>{c[project+'_heading']}</h1><p class="lead">{c[project+'_intro']}</p><div class="actions">{btn(AUR,c['aur_label'],glyph='terminal',large=True) if project=='alol' else ''}{btn(repo+'/releases/latest',('Скачать 1.0.1' if lang=='ru' else 'Download 1.0.1') if project=='alol' else c['download'],glyph='download',large=True)}{btn(repo,c['code'],True,glyph='code')}</div><p class="small">{c[project+'_requirement']}</p></div>{screenshot(lang,project)}</section>{aur_install(lang) if project=='alol' else ''}<section class="article columns reveal"><div><div class="eyebrow">{icon('touch_app')}{u['setup']}</div><h2>{c[project+'_setup_heading']}</h2></div><div>{numbered_steps(c[project+'_steps'])}{btn(documentation(lang,project),c['docs'],True,glyph='arrow_forward')}</div></section>'''
  if project=='ctsv':
   html+=f'''<section class="article reveal"><h2>{c['triggers_heading']}</h2><div class="table-wrap"><table><thead><tr>{''.join('<th scope="col">'+e(h)+'</th>' for h in c['trigger_headers'])}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+e(cell)+'</td>' for cell in row)+'</tr>' for row in c['trigger_rows'])}</tbody></table></div></section><section class="article columns reveal"><h2>{c['ctsv_tuning_heading']}</h2><div class="feature-list">{''.join('<div class="feature-row">'+paragraph(p)+'</div>' for p in c['ctsv_tuning'])}</div></section><section class="article columns reveal"><h2>{c['ctsv_limits_heading']}</h2><div>{paragraph(c['ctsv_limits'])}<div class="notice">{icon('info')}{paragraph(c['ctsv_links'])}</div></div></section>'''
  else:

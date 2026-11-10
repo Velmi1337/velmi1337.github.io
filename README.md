@@ -5,7 +5,7 @@
 Static English/Russian pages for two existing projects:
 
 - [CTSV](https://github.com/Velmi1337/CTSV): a root-free Circle to Search launcher for Android.
-- [ALOL](https://github.com/Velmi1337/ALOL): the stable ALOL 1.0.0 launcher for Arizona RP and Rodina RP on Linux x86_64, with Material 3 Expressive.
+- [ALOL](https://github.com/Velmi1337/ALOL): the stable ALOL 1.0.1 launcher for Arizona RP and Rodina RP on Linux x86_64, with Material 3 Expressive. Available as [alol on AUR](https://aur.archlinux.org/packages/alol), AppImage and native packages.
 
 ## Structure
 
